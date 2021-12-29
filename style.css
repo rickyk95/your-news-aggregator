@@ -1,0 +1,224 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: whitesmoke;
+}
+
+nav {
+  background-color: black;
+  color: white;
+}
+
+nav a {
+  color: white !important;
+}
+
+#feature-article {
+  padding: 20px;
+}
+
+#feature article h6 {
+  padding: 20px;
+  margin-top: 20px;
+}
+.navbar-brand i {
+  font-size: 2rem !important;
+  vertical-align: middle !important;
+}
+
+.navbar-brand span {
+  display: inline-block !important;
+  vertical-align: middle !important;
+  font-size: 1rem;
+  color: white;
+}
+#main-container {
+  display: grid;
+  grid-template-columns: 65% 35%;
+}
+
+#feature-section {
+  padding: 10px;
+}
+
+#feature-section h6 {
+  margin-top: 20px;
+}
+
+#feature-section img {
+  max-width: 100%;
+  width: 100%;
+}
+
+#feature-section-articles-without-images div {
+  margin-top: 2vh;
+  padding: 30px;
+  background-color: white;
+}
+
+#feature-section-articles-with-images {
+  display: grid;
+  grid-template-columns: repeat(2, 45%);
+  grid-column-gap: 3.33%;
+}
+
+#feature-section h6:not(:first-child) {
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+#feature-section > div:nth-child(1) {
+  padding: 20px;
+}
+#feature-section > div:nth-child(1) h6 {
+  font-size: 30px;
+}
+
+#articles-with-images h6 {
+  margin-left: 20px !important;
+}
+#articles-with-images > div {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  margin-top: 2vh;
+  align-items: center;
+  background-color: white;
+  padding: 30px;
+  margin: 2vw;
+}
+
+#articles-with-images img {
+  width: 100px;
+  height: 100px;
+}
+
+h6 {
+  color: black;
+}
+
+.subscription {
+  background-color: rgb(255, 255, 255);
+  box-sizing: border-box;
+  width: auto;
+  display: inline-block;
+  height: auto;
+  border: 2px black solid;
+  border-radius: 5px;
+  transition: top 2s ease-in-out;
+}
+.subscription form {
+  padding: 30px;
+}
+
+.subscription form h3 {
+  padding: 10px;
+}
+
+.subscription-exit-btn:hover {
+  background-color: black !important;
+  cursor: pointer;
+  color: white !important;
+}
+
+.subscription-closed {
+  display: none;
+}
+
+.subscription-not-loaded {
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.subscription-loaded {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.main-header {
+  font-style: bold;
+  text-decoration: underline;
+  font-family: 'Bebas Neue', cursive;
+}
+
+.sections {
+  display: grid;
+  align-self: center;
+  grid-template-columns: repeat(5, auto);
+  justify-content: center;
+}
+
+.sections span {
+  border-left: 3px solid;
+}
+
+.sections span h5 {
+  margin: 0 2vw;
+}
+
+footer {
+  position: fixed;
+  height: 300px;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  overflow-y: hidden;
+}
+.footer-offer {
+  display: grid;
+  grid-template-columns: 15% 30% 30% 25%;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  padding: 8px 0;
+  position: absolute;
+  transition: bottom 2s ease;
+  width: 100%;
+}
+
+.offer-hidden {
+  bottom: -300px;
+}
+.move-up {
+  bottom: 0;
+}
+
+.footer-offer > * {
+  text-align: center;
+}
+
+.footer-offer i {
+  font-size: 3rem;
+}
+
+@media screen and (max-width: 768px) {
+  #main-container {
+    grid-template-columns: 100%;
+  }
+
+  .subscription {
+    width: 90vw;
+  }
+
+  .subscription h1 {
+    font-size: 2rem;
+  }
+  .sections {
+    grid-template-columns: repeat(3, auto);
+    font-family: 'Bebas Neue', cursive;
+  }
+  .sections span {
+  }
+
+  .footer-offer * {
+    font-size: 1rem;
+  }
+  .footer-offer button {
+    font-size: 0.55rem;
+  }
+}

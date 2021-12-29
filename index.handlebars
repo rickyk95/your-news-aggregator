@@ -1,0 +1,219 @@
+<html>
+    <head>
+        <title>The News Algorithm</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cantarell:ital@1&family=PT+Sans+Narrow&family=Roboto:wght@100&family=Shippori+Antique+B1&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+      <nav class="navbar navbar-expand-lg">
+        <a href="/" class="navbar-brand">
+           <i class="far fa-newspaper"></i>
+           </a> 
+            <span class="text-white">All your news in one place</span>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#menu-items">
+            <span class="navbar-toggler-icon ">
+             
+            </span>
+        </button>
+        <div  class="collapse navbar-collapse" id="menu-items">
+        </div>
+      </nav>
+
+      <h1 class="display-3 text-center mt-5 main-header">
+          The News Algorithm
+      </h1>
+
+      <div class="sections">
+          <span><a href=""><h5>COVID-19</h5></a></span>
+          <span><h5>International</h5></span>
+          <span><h5>Economy</h5></span>
+          <span><h5>Business</h5></span>
+          <span><h5>Technology</h5></span>
+      </div>
+      <div class="subscription subscription-not-loaded">
+          <div class="d-flex">
+              <h3 class="ml-auto p-2 text-dark  subscription-exit-btn">X</h3>
+          </div>
+          <h3 class="text-center mb-1 px-3">
+              Subscribe to our weekly newsletter! 
+              
+          </h3>
+          <form action="/subscribe" class="text-center">
+          <div class="" style="display:flex;align-items:center;">
+            <img class="img-fluid" src="newspaper.png" width="200" height="200" style="object-fit: contain;" alt="">
+            <div class="d-flex flex-column w-100 text-center">
+            <input type="email" class="w-100 my-1" placeholder="Enter your name">
+            <input type="email" class=" w-100 my-1" placeholder="Enter your email">
+          </div>
+              </div>
+            <div class="d-flex ">
+                <button class="btn btn-dark mx-auto">Subscribe</button>
+            </div>
+          </form>
+      </div>
+
+
+      <div id="main-container">
+                 <div id="feature-section">
+                     <div id="feature-article">
+
+                     </div>
+                     <div id="feature-section-articles-without-images">
+
+                     </div>
+                     <div id="feature-section-articles-with-images">
+
+                     </div>
+                </div> 
+                <div id="articles-with-images">
+                         <h1 class="text-center">
+                              Most Read Articles
+                        </h1>
+                </div>
+     </div>
+
+<footer>
+
+     <div class="footer-offer offer-hidden">
+             <i class="far fa-newspaper"></i>
+             <h1 class="text-center display-4">
+                 Special Offer
+             </h1>
+             <h3 class="text-primary">
+                 For only $5.99/month
+             </h3>
+             <div>
+                <button class="btn btn-primary">
+                    Subscribe Now
+                </button>
+             </div> 
+     </div>
+</footer>
+
+<script>
+
+   const mainContainer = document.querySelector('#articles-with-images')
+    const featureArticle = document.querySelector('#feature-article')
+    const featureArticlesNoImages = document.querySelector('#feature-section-articles-without-images')
+    const articlesWithImagesContainer = document.querySelector('#articles-with-images')
+    const articlesWithoutImagesContainer = document.querySelector('#articles-without-images')
+    const featureArticlesWithImages = document.querySelector('#feature-section-articles-with-images')
+    const xmlHTTP = new XMLHttpRequest()
+    function requestFunction(){  
+                    xmlHTTP.onreadystatechange = function(){
+                    if(this.readyState == 4 && this.status == 200){
+                        const articlesWithImages = JSON.parse(this.responseText)[0]
+                        const articlesWithoutImages = JSON.parse(this.responseText)[1]
+                      articlesWithImages.forEach(({title, link, img},index)=>{
+                            const articleDiv = document.createElement('div')
+                            const titleElement = document.createElement('h6')
+                            const linkElement = document.createElement('a')
+                            linkElement.setAttribute('href',link)
+                            linkElement.appendChild(titleElement)
+                            const imageContainer = document.createElement('div')
+                            imageContainer.classList.add('img-container')
+                            const imgElement = document.createElement('img')
+                            imgElement.setAttribute('src',img)
+                            titleElement.appendChild(document.createTextNode(title))
+                            imageContainer.appendChild(imgElement)
+                            articleDiv.appendChild(imageContainer)
+                            articleDiv.appendChild(linkElement)
+
+                            if(index === 0){
+                                return featureArticle.appendChild(articleDiv)
+                            }
+                            articlesWithImagesContainer.appendChild(articleDiv)
+                        }) 
+
+                      articlesWithoutImages.forEach(({title, link},)=>{
+                            const articleDiv = document.createElement('div')
+                            const titleElement = document.createElement('h6')
+                            const linkElement = document.createElement('a')
+                            linkElement.setAttribute('href',link)
+                            linkElement.appendChild(titleElement)
+                            titleElement.appendChild(document.createTextNode(title))
+                            articleDiv.appendChild(linkElement)
+                            featureArticlesNoImages.appendChild(articleDiv)
+                        }) 
+                    }
+                }
+                    xmlHTTP.open('GET','http://localhost:3000/aj')
+                    xmlHTTP.send()
+                }
+
+                function requestFunctionTwo(){
+                    const xmlHTTP = new XMLHttpRequest()
+                    xmlHTTP.onreadystatechange=function(){
+                    if(this.readyState == 4 && this.status == 200){
+                     const articlesWithImages = JSON.parse(this.responseText)[0]
+                     const articlesWithoutImages = JSON.parse(this.responseText)[1]
+                      articlesWithImages.forEach(({title, link, img},index)=>{
+                            const articleDiv = document.createElement('div')
+                            const titleElement = document.createElement('h6')
+                            const linkElement = document.createElement('a')
+                            linkElement.setAttribute('href',link)
+                            linkElement.appendChild(titleElement)
+                            const imageContainer = document.createElement('div')
+                            imageContainer.classList.add('img-container')
+                            const imgElement = document.createElement('img')
+                            imgElement.setAttribute('src',img)
+                            titleElement.appendChild(document.createTextNode(title))
+                            imageContainer.appendChild(imgElement)
+                            articleDiv.appendChild(imageContainer)
+                            articleDiv.appendChild(linkElement)
+                            featureArticlesWithImages.appendChild(articleDiv)
+                        }) 
+
+                         articlesWithoutImages.forEach(({title, link},index)=>{
+                            const articleDiv = document.createElement('div')
+                            const titleElement = document.createElement('h6')
+                            const linkElement = document.createElement('a')
+                            linkElement.setAttribute('href',link)
+                            linkElement.appendChild(titleElement)
+                            titleElement.appendChild(document.createTextNode(title))
+                            articleDiv.appendChild(linkElement)
+                            featureArticlesWithImages.appendChild(articleDiv)
+
+                        }) 
+                    }
+                        
+                    }  
+                        xmlHTTP.open('GET','http://localhost:3000/vox')
+                        xmlHTTP.send()     
+                }
+
+                requestFunction()
+                requestFunctionTwo()
+               const subscriptionBox = document.querySelector('.subscription')
+               const subscriptionBoxExitBtn = document.querySelector('.subscription-exit-btn')
+        
+                    subscriptionBoxExitBtn.addEventListener('click',()=>{
+                            subscriptionBox.classList.remove('subscription-loaded')
+                            subscriptionBox.classList.add('subscription-closed')
+                    })
+                    setTimeout(()=>{
+                           subscriptionBox.classList.remove('subscription-not-loaded')
+                           subscriptionBox.classList.add('subscription-loaded')
+                    },3000) 
+
+               const footerOffer = document.querySelector('.footer-offer')
+
+               setTimeout(()=>{               
+                  footerOffer.classList.add('move-up')
+               },8000)
+
+</script>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        
+    </body>
+
+
+</html>
