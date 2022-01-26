@@ -106,7 +106,14 @@
 </footer>
 
 <script>
+
+    
     const mainContainer = document.querySelector('#articles-with-images')
+    mainContainer.addEventListener('click',()=>{
+        gtag('event','container-click',{
+            'click:':'clicked'
+        })
+    })
     const featureArticle = document.querySelector('#feature-article')
     const featureArticlesNoImages = document.querySelector('#feature-section-articles-without-images')
     const articlesWithImagesContainer = document.querySelector('#articles-with-images')
