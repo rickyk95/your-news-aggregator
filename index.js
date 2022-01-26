@@ -38,9 +38,7 @@ app.get('/vox', async (req, res) => {
         })
 
         res.json([articlesWithImages,articlesWithoutImages])
-}
-)
-
+})
 
 app.get('/aj', async (req, res) => {
         const response = await axios.get('https://www.aljazeera.com')
